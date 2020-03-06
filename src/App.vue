@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <ul class="tabs">
-      <li><a @click="chartChange('g2Map')">地图</a></li>
-      <li><a @click="chartChange('g2Line')">折线图</a></li>
-      <li><a @click="chartChange('g2Bar')">柱状图</a></li>
-      <li><a @click="chartChange('sheet')">表格</a></li>
+      <li :class="{active: comp === 'g2Map'}"><a @click="chartChange('g2Map')">地图</a></li>
+      <li :class="{active: comp === 'g2Line'}"><a @click="chartChange('g2Line')">折线图</a></li>
+      <li :class="{active: comp === 'g2Bar'}"><a @click="chartChange('g2Bar')">柱状图</a></li>
+      <li :class="{active: comp === 'g2Pie'}"><a @click="chartChange('g2Pie')">饼图</a></li>
+      <li :class="{active: comp === 'sheet'}"><a @click="chartChange('sheet')">表格</a></li>
     </ul>
     <h3>{{comp}}</h3>
     <component :is="comp" msg="Welcome to Your Vue.js App"/>
@@ -15,13 +16,17 @@
 import Map from './components/Map.vue'
 import Line from './components/Line.vue'
 import Bar from './components/Bar.vue'
-
+import Sheet from './components/Sheet.vue'
+import Pie from './components/Pie.vue'
+import unit from './unit'
 export default {
   name: 'App',
   components: {
     g2Map: Map,
     g2Line: Line,
-    g2Bar: Bar
+    g2Bar: Bar,
+    sheet: Sheet,
+    g2Pie: Pie
   },
   data: () => ({
     comp: 'g2Map'
@@ -50,6 +55,9 @@ export default {
   margin-left: 10px;
   list-style: none;
   cursor: pointer;
+}
+.tabs li.active {
+  color: red;
 }
 .tabs li:hover {
   color: brown;

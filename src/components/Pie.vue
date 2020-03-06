@@ -2,7 +2,7 @@
  * @Description: 填写文件描述
  * @Author: unkown
  * @Date: 2020-02-25 14:01:45
- * @LastEditTime: 2020-03-06 17:12:38
+ * @LastEditTime: 2020-03-05 18:35:02
  * @LastEditors: zql
  -->
 <template>
@@ -12,11 +12,10 @@
 </template>
 <script>
 import {Chart} from "@antv/g2";
-import { transfromToList } from '../unit'
+// import DataSet from "@antv/data-set";
 export default {
   mounted() {
-    const originData = require("../assets/data.json");
-    const data = transfromToList(originData)
+    const data = require("../assets/common.json")
     
     const chart = new Chart({
       container: "container",
@@ -29,14 +28,14 @@ export default {
         type: "timeCat" // 为属性定义别名
       }
     });
+    chart.coordinate('theta', {
+      radius: 0.8,
+    });
     chart
       .interval()
-      .position("unitValue*value")
+      .position("value")
       .color("eventCode")
-      .adjust([{
-        type: 'dodge',
-        marginRatio: 0
-      }]);
+      .adjust('stack')
 //       .adjust([
 //   {
 //     type: 'dodge',
